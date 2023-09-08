@@ -1,10 +1,21 @@
 import Post from "../models/Post.model.js";
 import User from "../models/User.model.js";
+import cloudinary from "cloudinary";
 
 // ========== CRUD: CREATE ==========
 export const createPost = async (req, res) => {
     try {
         const { userId, description, picturesPath } = req.body;
+
+        let picturePath = "";
+        if (picture) {
+            const result = await cloudinary.uploader.upload(picture, {
+                folder: 'truth-free-pictures',// Folder name in Cloudinary
+                resource_type: 'auto'
+            });
+            picturePath = result.secure_url;
+        }
+
         const user = await User.findById(userId);
         const newPost = new Post ({
             userId,

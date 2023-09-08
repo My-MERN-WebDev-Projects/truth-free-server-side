@@ -14,6 +14,7 @@ import cloudinary from 'cloudinary';
 import { error, log } from "console";
 import { register } from "./controllers/auth.js";
 import { verifyToken } from "./middleware/auth.js";
+import { createPost } from "./controllers/posts.js"
 
 
 
@@ -49,6 +50,7 @@ app.post("/auth/register", register);
 // ========== ROUTES ==========
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.post("/posts", verifyToken, createPost);
 app.use("/posts", postRoutes);
 
 
