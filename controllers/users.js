@@ -1,4 +1,4 @@
-import User from "../models/User.model";
+import User from "../models/User.model.js";
 
 export const getUser = async (req, res) => {
     try {
@@ -16,7 +16,7 @@ export const getUserFriends = async (req, res) => {
         const user = await User.findById(id);
     
         const friends = await Promise.all(
-            user.friends.map((id) => User.findById(id));
+            user.friends.map((id) => User.findById(id))
         );
         const formattedFriends = friends.map(
             ({ _id, firstName, middleName, lastName, location, picturePath }) => {
@@ -48,7 +48,7 @@ export const addRemoveFriend = async (req, res) => {
         await friend.save();
 
         const friends = await Promise.all(
-            user.friends.map((id) => User.findById(id));
+            user.friends.map((id) => User.findById(id))
         );
         const formattedFriends = friends.map(
             ({ _id, firstName, middleName, lastName, location, picturePath }) => {
@@ -61,5 +61,3 @@ export const addRemoveFriend = async (req, res) => {
         res.status(404).json({ message: err.message });
     }
 }
-
-// 11238

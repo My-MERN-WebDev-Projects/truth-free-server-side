@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema(
     picturePath: {
       type: String,
       default: "",
-    }
+    },
     location: {
       type: String,
       required: false,
